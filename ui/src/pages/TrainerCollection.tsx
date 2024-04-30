@@ -21,12 +21,12 @@ function TrainerCollection (props: PropsTrainerCollection) {
         <Box sx={{ flexGrow: 1 }}>
             <Navbar />
             <Typography variant='h5'>Trainer's Collection</Typography>
-            <Grid container spacing={2}>
-            { pokemons && pokemons.length === 0 && <Typography>No results</Typography> }
-            { pokemons && pokemons.length > 0 && pokemons.map(p => <PokemonThumb
+            <Grid container spacing={2} >
+            { pokemons && pokemons.length === 0 && <Grid item><Typography>No results</Typography></Grid> }
+            { pokemons && pokemons.length > 0 && pokemons.map(p =>  <Grid item md={4} sm={4}><PokemonThumb
                 key={p}
                 name={p}
-                />) }
+                /></Grid>) }
             </Grid>
         </Box>
     </Container>;

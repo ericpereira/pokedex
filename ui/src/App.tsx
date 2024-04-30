@@ -159,10 +159,11 @@ function App() {
        { selectedArea && selectedArea !== '' && <Typography variant='h4' style={{ marginBottom: 30 }}>{selectedArea}</Typography> }
         <Grid container spacing={2}>
           { pokemons && pokemons.length === 0 && <Typography>No results</Typography> }
-          { pokemons && pokemons.length > 0 && pokemons.map(p => <PokemonThumb
-            key={p.name}
-            name={p.name}
-             />) }
+          { pokemons && pokemons.length > 0 && pokemons.map(p => <Grid item md={4} sm={4}>
+            <PokemonThumb
+              key={p.name}
+              name={p.name}
+              /></Grid>) }
         </Grid>
 
         { !selectedType && selectedArea === '' &&

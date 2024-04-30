@@ -22,7 +22,7 @@ describe('Pokemon Class', () => {
     expect(pokemon.getWeight()).toBe(60);
   })
   test('it should get the height', () => {
-    expect(pokemon.getHeight).toBe(4);
+    expect(pokemon.getHeight()).toBe(4);
   })
   test('it should get the order', () => {
     expect(pokemon.getOrder()).toBe(35);

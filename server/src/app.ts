@@ -14,17 +14,15 @@ app.get('/pokemon/all', async (_req, res) => {
     const { query, location, size, height } = _req.body;
     const response: any = await axios.get(POKEMON_API_URL + `pokemon/?limit=${limit}&offset=${offset}`, {});
     const { results, count } = response.data
-    console.log('limit', limit)
-    console.log('offset', offset)
-    // const pokemons = []
-    // for(const p of results){
-    //   const pokemon = await axios.get(POKEMON_API_URL + `pokemon/${p.name}`)
-    //   pokemons.push(pokemon.data);
-    // }
+    const pokemons = []
+    for(const p of results){
+      const pokemon = await axios.get(POKEMON_API_URL + `pokemon/${p.name}`)
+      pokemons.push(pokemon.data);
+    }
     
-    // return res.status(200).json({ total: count, data: pokemons });
+    return res.status(200).json({ total: count, data: pokemons });
     
-    res.status(200).json({ total: count, data: results.map((p: any) => ({ name: p.name })) });
+    //res.status(200).json({ total: count, data: results.map((p: any) => ({ name: p.name })) });
 
   } catch (error) {
     console.log(error)
@@ -37,7 +35,23 @@ app.get('/pokemon/:name', async (_req, res) => {
     const { name } = _req.params;
     const response: any = await axios.get(POKEMON_API_URL + `pokemon/${name}`, {});
     const image = response.data?.sprites?.other?.home?.front_default ? response.data?.sprites?.other?.home?.front_default : response.data?.sprites?.front_default;
-    res.status(200).json({ data: {...response.data, image } });
+
+    let evolutionChain = {}
+    try {
+      //load pokemon chain
+      const responseSpecie = await axios.get(POKEMON_API_URL + `pokemon-species/${name}`)
+      const chainUrl = responseSpecie?.data?.evolution_chain?.url;
+      
+      if(chainUrl){
+        const responseChain = await axios.get(chainUrl)
+        evolutionChain = responseChain?.data?.chain
+      } 
+    } catch (error) {
+      console.log(error)
+      console.log('error to obtain specie chain' + name)
+    }
+
+    res.status(200).json({ data: {...response.data, image, evolutionChain } });
 
   } catch (error) {
     console.log(error)
@@ -52,7 +66,6 @@ app.get('/types/:type?', async (_req, res) => {
     const isType = type && type !== '' ? true : false;
     const url = isType ? `type/${type}` : `type?limit=${limit}&offset=${offset}`;
     const response: any = await axios.get(POKEMON_API_URL + url, {});
-    console.log('isType', isType)
     res.status(200).json(
       isType ?
       {
@@ -73,11 +86,9 @@ app.get('/types/:type?', async (_req, res) => {
 app.get('/locations/:location?', async (_req, res) => {
   try {
     const { location } = _req.params;
-    console.log('location', location);
     const { offset, limit } = _req.query;
     const isLocation = location && location !== '' ? true : false
     const url = isLocation ? `location-area/${location}` : `location-area?limit=${limit}&offset=${offset}`;
-    console.log('---', POKEMON_API_URL + url)
     const response: any = await axios.get(POKEMON_API_URL + url, {});
     res.status(200).json({
       ...(!isLocation ? { total: response.data?.count } : {}),
