@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import PokemonDetails from './pages/PokemonDetails';
 import { SharedDataProvider } from './components/SharedData';
+import TrainerCollection from './pages/TrainerCollection';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: 'pokemon/:name',
     element: <PokemonDetails />
+  },
+  {
+    path: 'trainer-collection',
+    element: <TrainerCollection />
   }
 ]);
 

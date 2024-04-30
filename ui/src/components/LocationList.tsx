@@ -18,6 +18,7 @@ type Location = {
 
 type PropsLocationList = {
     loadRegionPokemons: any
+    clearLocation: boolean
 }
 
 const PER_PAGE = 100;
@@ -67,10 +68,17 @@ function LocationList (props: PropsLocationList) {
         }        
     }, [selectedLocation])
 
-    const handleLoadLocation = async (name: string) => {
+    const handleLoadLocation = (name: string) => {
         setSelectedLocation(name);
         setExpanded(false);
     }
+
+    useEffect(() => {
+        if(props.clearLocation){
+            setSelectedLocation('');
+            setExpanded(false);
+        }
+    }, [props.clearLocation])
 
     function renderRow(props: ListChildComponentProps) {
         const { index, style, data } = props;

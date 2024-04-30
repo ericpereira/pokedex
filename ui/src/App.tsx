@@ -61,12 +61,11 @@ const loadTypePokemons = async (
 
 function App() {
   const [loading, setLoading] = useState(false);
-  // const [myPokemons, setMyPokemons] = useState<string[]>([])
-  // const [viewedPokemons, setViewedPokemons] = useState<string[]>([])
   const [healthCheckMessage, setHealthCheckMessage] = useState("Loading...");
   const [selectedArea, setSelectedArea] = useState('');
   const [pokemons, setPokemons] = useState<Array<Pokemon>>([])
-  const [totalPokemons, setTotalPokemons] = useState(0)
+  const [totalPokemons, setTotalPokemons] = useState(0);
+  const [clearLocation, setClearLocation] = useState(false);
   
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -83,6 +82,7 @@ function App() {
     setPokemons(pokemons)
     setTotalPokemons(total)
     setSelectedArea(area)
+    setClearLocation(false)
   }
 
   useEffect(() => {
@@ -123,6 +123,8 @@ function App() {
 
   const handleClearFilter = () => {
     setSelectedType('')
+    setClearLocation(true)
+    setSelectedArea('')
     loadPokemons(rowsPerPage, pageOffset, setPokemons, setTotalPokemons)
   }
 
@@ -146,7 +148,7 @@ function App() {
             </FormControl>
           </Grid>
           <Grid>
-            <LocationList loadRegionPokemons={loadRegionPokemons} />
+            <LocationList loadRegionPokemons={loadRegionPokemons} clearLocation={clearLocation} />
           </Grid>
           <Grid>
             <Button variant="outlined" color="error" onClick={() => handleClearFilter()}>
@@ -160,10 +162,6 @@ function App() {
           { pokemons && pokemons.length > 0 && pokemons.map(p => <PokemonThumb
             key={p.name}
             name={p.name}
-            // catchPokemon={handleCatchPokemon}
-            // myPokemons={myPokemons}
-            // viewPokemon={handleViewPokemon}
-            // viewedPokemons={viewedPokemons}
              />) }
         </Grid>
 

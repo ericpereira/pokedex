@@ -6,6 +6,8 @@ import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link } from "react-router-dom";
 import { useSharedData } from "./SharedData";
+import { PokemonInfo } from "../common/types/pokemon";
+import { loadPokemonInfo } from "../common/utils";
 
 
 const Image = styled('img')({
@@ -14,24 +16,6 @@ const Image = styled('img')({
 
 type PokemonThumbProps = {
     name: string
-}
-
-type PokemonInfo = {
-    image: string;
-}
-
-const loadPokemonInfo = async (
-    setPokemonInfo: React.Dispatch<React.SetStateAction<PokemonInfo | undefined>>,
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    name: string) => {
-        
-    await axios.get(`/pokemon/${name}`) 
-        .then(response => {
-            setTimeout(() => {}, 3000)
-            setPokemonInfo(response.data.data)
-            setIsLoading(false)
-        })
-    
 }
 
 function PokemonThumb(props: PokemonThumbProps){
@@ -57,10 +41,10 @@ function PokemonThumb(props: PokemonThumbProps){
     return <>
         <Grid item md={4} sm={4}>
         <Card>
-            { isLoading ? <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" /> : <Link to={`pokemon/${name}`}><Image src={pokemonInfo?.image} alt='' /></Link> }
+            { isLoading ? <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" /> : <Link to={`/pokemon/${name}`}><Image src={pokemonInfo?.image} alt='' /></Link> }
             { isLoading ? <Skeleton width="100%">
                 <Typography>.</Typography>
-                </Skeleton> : <Link to={`pokemon/${name}`}><Typography variant="h5" gutterBottom align="center" >
+                </Skeleton> : <Link to={`/pokemon/${name}`}><Typography variant="h5" gutterBottom align="center" >
                     { name }
                 </Typography></Link>}
                 <Grid container style={{ justifyContent: 'center' }} >

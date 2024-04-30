@@ -5,3 +5,7 @@ export interface Pokemon {
   height: number,
   order: number,
 }
+
+export interface PokemonInfo {
+  image: string;
+}
