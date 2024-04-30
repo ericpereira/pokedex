@@ -3,13 +3,33 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import PokemonDetails from './pages/PokemonDetails';
+import { SharedDataProvider } from './components/SharedData';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: 'pokemon/:name',
+    element: <PokemonDetails />
+  }
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <SharedDataProvider>
+      <RouterProvider router={router} />
+    </SharedDataProvider>
   </React.StrictMode>
 );
 

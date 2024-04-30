@@ -92,7 +92,7 @@ function LocationList (props: PropsLocationList) {
                 id="panel1-header"
                 onClick={() => setExpanded(!expanded)}
                 >
-                Areas
+                { selectedLocation && selectedLocation !== '' ? `Area: ${selectedLocation}` : 'Areas'}
             </AccordionSummary>
             <AccordionDetails>
                 <Box

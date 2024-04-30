@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import TablePagination from '@mui/material/TablePagination';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import axios from "axios";
-import { Card, Container, Skeleton } from "@mui/material";
+import { Container } from "@mui/material";
 import { Pokemon } from "./common/types/pokemon";
 import PokemonThumb from "./components/PokemonThumb";
 import Navbar from "./components/Navbar";
@@ -65,6 +61,8 @@ const loadTypePokemons = async (
 
 function App() {
   const [loading, setLoading] = useState(false);
+  // const [myPokemons, setMyPokemons] = useState<string[]>([])
+  // const [viewedPokemons, setViewedPokemons] = useState<string[]>([])
   const [healthCheckMessage, setHealthCheckMessage] = useState("Loading...");
   const [selectedArea, setSelectedArea] = useState('');
   const [pokemons, setPokemons] = useState<Array<Pokemon>>([])
@@ -159,7 +157,14 @@ function App() {
        { selectedArea && selectedArea !== '' && <Typography variant='h4' style={{ marginBottom: 30 }}>{selectedArea}</Typography> }
         <Grid container spacing={2}>
           { pokemons && pokemons.length === 0 && <Typography>No results</Typography> }
-          { pokemons && pokemons.length > 0 && pokemons.map(p => <PokemonThumb key={p.name} name={p.name} />) }
+          { pokemons && pokemons.length > 0 && pokemons.map(p => <PokemonThumb
+            key={p.name}
+            name={p.name}
+            // catchPokemon={handleCatchPokemon}
+            // myPokemons={myPokemons}
+            // viewPokemon={handleViewPokemon}
+            // viewedPokemons={viewedPokemons}
+             />) }
         </Grid>
 
         { !selectedType && selectedArea === '' &&
