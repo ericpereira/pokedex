@@ -52,8 +52,8 @@ app.get('/pokemon/:name', async (_req, res) => {
           evolutionChain = responseChain?.data?.chain
         } 
       } catch (error) {
-        console.log(error)
-        console.log('error to obtain specie chain' + name)
+        //console.log(error)
+        console.log('error to obtain specie chain ' + name)
       }
 
       data = { data: {...response.data, image, evolutionChain } };
@@ -125,7 +125,7 @@ app.get('/locations/:location?', async (_req, res) => {
 
 
 app.get('/_health', (_req, res) => {
-  res.send('Server is running!')
+  res.send('Server is running!');
 })
 
 app.listen(PORT, () => {

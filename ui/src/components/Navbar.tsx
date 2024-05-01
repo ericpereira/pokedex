@@ -24,7 +24,7 @@ function Navbar({ props }: any){
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Pokedex by Eric
             </Typography>
-            <Button onClick={() => navigate('/trainer-collection')} color="inherit" >Trainer’s Collection</Button>
+            <Button onClick={() => navigate('/trainer-collection')} color="inherit" >My Collection</Button>
         </Toolbar>
     </AppBar>
 }

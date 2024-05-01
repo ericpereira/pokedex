@@ -43,7 +43,7 @@ function PokemonDetails(props: PropsPokemonDetails) {
             <Box sx={{ flexGrow: 1 }}>
                 <Navbar />
             </Box>
-            <Grid container>
+            <Grid container style={{ paddingTop: 30, paddingBottom: 30 }} >
                 <Grid item md={6} style={{padding: 5}} >
                     <PokemonThumb name={name as string} setPokemonParentInfo={setPokemonParentInfo} />
                 </Grid>

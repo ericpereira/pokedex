@@ -7,10 +7,8 @@ import ListItemText from '@mui/material/ListItemText';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Button from '@mui/material/Button';
 
 type Location = {
     name: string;
@@ -85,7 +83,7 @@ function LocationList (props: PropsLocationList) {
         const name = locations[index].name;
         return (
           <ListItem style={style} key={index} component="div" disablePadding>
-            <ListItemButton onClick={() => handleLoadLocation(name)} style={{ backgroundColor: (selectedLocation === name ? 'green' : 'transparent') }}>
+            <ListItemButton onClick={() => handleLoadLocation(name)} style={{ backgroundColor: (selectedLocation === name ? '#1976d2' : 'transparent') }}>
                 <ListItemText primary={name} />
             </ListItemButton>
           </ListItem>

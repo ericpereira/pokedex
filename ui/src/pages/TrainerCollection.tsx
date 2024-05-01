@@ -20,7 +20,7 @@ function TrainerCollection (props: PropsTrainerCollection) {
     return <Container maxWidth="md" >
         <Box sx={{ flexGrow: 1 }}>
             <Navbar />
-            <Typography variant='h5'>Trainer's Collection</Typography>
+            <Typography variant='h5' style={{paddingTop: 30, paddingBottom: 30}}>Trainer's Collection</Typography>
             <Grid container spacing={2} >
             { pokemons && pokemons.length === 0 && <Grid item><Typography>No results</Typography></Grid> }
             { pokemons && pokemons.length > 0 && pokemons.map(p =>  <Grid item md={4} sm={4}><PokemonThumb

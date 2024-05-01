@@ -83,6 +83,7 @@ function App() {
     setTotalPokemons(total)
     setSelectedArea(area)
     setClearLocation(false)
+    setSelectedType('')
   }
 
   useEffect(() => {
@@ -99,6 +100,8 @@ function App() {
 
   const handleChangeType = (event: SelectChangeEvent) => {
     setSelectedType(event.target.value as string);
+    setClearLocation(true)
+    setSelectedArea('')
   };
 
   const handleChangePage = (
@@ -132,19 +135,19 @@ function App() {
     <Container maxWidth="md" >
       <Box sx={{ flexGrow: 1 }}>
         <Navbar />
-        <Grid container style={{ paddingTop: 30, paddingBottom: 30 }}>
-          <Grid item md={4} sm={4}>
+        <Grid container style={{ paddingTop: 30, paddingBottom: 30, justifyContent: 'space-around' }}>
+          <Grid item md={4} sm={4} >
             <FormControl fullWidth>
-            <InputLabel id="type">Type</InputLabel>
-              <Select
-                labelId="type"
-                id="type-select"
-                value={selectedType}
-                label="Type"
-                onChange={handleChangeType}
-              >
-                {types && types.length > 0 && types.map(t => <MenuItem key={t?.name} value={t?.name}>{t?.name}</MenuItem>)}
-              </Select>
+              <InputLabel id="type">Type</InputLabel>
+                <Select
+                  labelId="type"
+                  id="type-select"
+                  value={selectedType}
+                  label="Type"
+                  onChange={handleChangeType}
+                >
+                  {types && types.length > 0 && types.map(t => <MenuItem key={t?.name} value={t?.name}>{t?.name}</MenuItem>)}
+                </Select>
             </FormControl>
           </Grid>
           <Grid>
